@@ -1,0 +1,103 @@
+<html><head><meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Resistor Game</title> 
+  <link rel="stylesheet" href="style.css"> 
+  <style type="text/css" id="dcoder_stylesheet">body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.game-container {
+  margin-top: 50px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.resistor-display {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.color-band {
+  width: 30px;
+  height: 100px;
+  margin: 0 5px;
+  border-radius: 5px;
+}
+
+#band1 { background-color: red; }
+#band2 { background-color: green; }
+#band3 { background-color: orange; }
+
+input, button {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#result {
+  font-size: 18px;
+  margin-top: 20px;
+}</style></head><body><div class="game-container"> 
+   <h1>Resistor Game</h1> 
+   <p>Guess the resistor value based on the color bands!</p> 
+   <div class="resistor-display"> 
+    <div class="color-band" id="band1"></div> 
+    <div class="color-band" id="band2"></div> 
+    <div class="color-band" id="band3"></div> 
+   </div> 
+   <input type="text" id="guess" placeholder="Enter your guess"> <button id="check-button">Check</button> 
+   <p id="result"></p> 
+  </div> 
+  <script src="script.js"></script> 
+ 
+<script type="text/javascript" id="dcoder_script">// Resistor color code values
+const colorValues = {
+  red: 2,
+  green: 5,
+  orange: 3
+};
+
+const calculateValue = () => {
+  const band1 = colorValues['red'];
+  const band2 = colorValues['green'];
+  const band3 = colorValues['orange'];
+
+  return (band1 * 10 + band2) * Math.pow(10, band3);
+};
+
+const resistorValue = calculateValue();
+
+document.getElementById('check-button').addEventListener('click', () => {
+  const userGuess = parseInt(document.getElementById('guess').value, 10);
+  const result = document.getElementById('result');
+
+  if (userGuess === resistorValue) {
+    result.textContent = 'Correct! 🎉';
+    result.style.color = 'green';
+  } else {
+    result.textContent = `Wrong! The correct value is ${resistorValue} ohms.`;
+    result.style.color = 'red';
+  }
+});</script></body></html>
